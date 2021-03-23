@@ -92,7 +92,7 @@ Install ansible tool
 ```
   ansible -m ping all
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/ansible_ping.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/ansible_ping.jpg)
 
 ## Ansible Playbooks
 In our project, Ansible playbooks are implemented to
@@ -136,7 +136,7 @@ In our project, Ansible playbooks are implemented to
 
 ### 6. Check the deployment status
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/nodes.jpg)
-![image](https://github.com/MiaYWei/ansible_kubernetes/tree/main/images/pods.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/pods.jpg)
 
 ## Authors
 
