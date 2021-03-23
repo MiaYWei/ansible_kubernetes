@@ -22,7 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Network Topology
 
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/topology.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/topology.jpg)
 ```
 Ansible Server:
   10.128.0.30
