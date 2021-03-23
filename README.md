@@ -108,20 +108,20 @@ In our project, Ansible playbooks are implemented to
 ```
 
 ### 1. Upload playbooks to ansible server node
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/playbooks.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/playbooks.jpg)
 
 ### 2. Deploy master node
 ```
   cd mia_playbook
   ansible-playbook deploy_master_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/master.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/master.jpg)
 
 ### 3. Deploy worker nodes 
 ```
   ansible-playbook deploy_worker_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/workers.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/workers.jpg)
 
 ### 4. Install kubectl and kubelet 
 ```
@@ -132,11 +132,11 @@ In our project, Ansible playbooks are implemented to
 ```
   ansible-playbook deploy_docker_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/docker.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/docker.jpg)
 
 ### 6. Check the deployment status
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/nodes.jpg)
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/pods.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/nodes.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/tree/main/images/pods.jpg)
 
 ## Authors
 
