@@ -18,11 +18,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Linux OS: CentOS Linux release 7.9.2009 (Core)
 * VMs deployed on Google Cloud Platform
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/main/images/GoogleCloudPlatform.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/GoogleCloudPlatform.jpg)
 
 ### Network Topology
 
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/topology.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/topology.jpg)
 ```
 Ansible Server:
   10.128.0.30
@@ -44,7 +44,7 @@ Install ansible tool
   sudo yum install ansible
   ansible --version
 ```
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/main/images/ansible.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/ansible.jpg)
 
 #### 2. Configure Ansible Inventory (/etc/ansible/hosts)
 ```
@@ -92,7 +92,7 @@ Install ansible tool
 ```
   ansible -m ping all
 ```
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/ansible_ping.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/ansible_ping.jpg)
 
 ## Ansible Playbooks
 In our project, Ansible playbooks are implemented to
@@ -108,20 +108,20 @@ In our project, Ansible playbooks are implemented to
 ```
 
 ### 1. Upload playbooks to ansible server node
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/playbooks.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/playbooks.jpg)
 
 ### 2. Deploy master node
 ```
   cd mia_playbook
   ansible-playbook deploy_master_playbook.yml
 ```
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/master.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/master.jpg)
 
 ### 3. Deploy worker nodes 
 ```
   ansible-playbook deploy_worker_playbook.yml
 ```
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/workers.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/workers.jpg)
 
 ### 4. Install kubectl and kubelet 
 ```
@@ -132,11 +132,11 @@ In our project, Ansible playbooks are implemented to
 ```
   ansible-playbook deploy_docker_playbook.yml
 ```
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/docker.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/docker.jpg)
 
 ### 6. Check the deployment status
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/nodes.jpg)
-![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/pods.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/nodes.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/readme/images/pods.jpg)
 
 ## Authors
 
