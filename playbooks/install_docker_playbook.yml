@@ -1,0 +1,24 @@
+---
+- hosts: k8s-all
+  remote_user: root
+  tasks:
+  - name: install pre-requisite packages
+    yum:
+     name: "{{item}}"
+     state: latest
+    loop:
+     - yum-utils
+     - device-mapper-persistent-data
+     - lvm2
+
+  - name: add docker CE repo
+    get_url:
+     url: https://download.docker.com/linux/centos/docker-ce.repo
+     dest: /etc/yum.repos.d/docker-ce.repo
+
+  - name: install docker
+    yum: name=docker state=latest
+
+  - name: start and enable the Docker daemon
+    service: name=docker state=started enabled=yes
+       

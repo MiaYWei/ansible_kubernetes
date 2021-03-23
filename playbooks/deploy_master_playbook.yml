@@ -1,0 +1,34 @@
+---
+- hosts: k8s-master
+  remote_user: root
+  vars:
+    k8s_version: 1.16.0
+    k8s_master: 10.128.0.32
+  tasks:
+    - name: prepare env
+      script: ./pre-setup.sh      
+        
+    - name: start kubelet 
+      shell: systemctl enable kubelet && systemctl start kubelet
+      
+    - name: start docker 
+      shell: systemctl enable docker && systemctl start docker
+      
+    - name: set ipv4 forward
+      shell: echo '1' > /proc/sys/net/ipv4/ip_forward
+      
+    - name: init k8s
+      shell: kubeadm init --kubernetes-version {{k8s_version}} --apiserver-advertise-address {{k8s_master}}  --pod-network-cidr=10.244.0.0/16 
+      
+    - name: config kube
+      shell: mkdir -p $HOME/.kube && cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && chown $(id -u):$(id -g) $HOME/.kube/config
+      
+    - name: get join command
+      shell: kubeadm token create --print-join-command 
+      register: join_command
+      
+    - name: show join command
+      debug: var=join_command verbosity=0
+      
+    - name:install network add-on
+      command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml

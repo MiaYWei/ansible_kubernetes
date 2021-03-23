@@ -1,0 +1,18 @@
+---
+- hosts: k8s-nodes
+  remote_user: root
+  tasks:
+    - name: prepare env
+      script: ./pre-setup.sh 
+      
+    - name: start kubelet 
+      shell: systemctl enable kubelet && systemctl start kubelet
+    
+    - name: reset kubeadm 
+      shell: kubeadm reset -f
+      
+    - name: set ipv4 forward
+      shell: echo '1' > /proc/sys/net/ipv4/ip_forward
+      
+    - name: join cluster
+      shell: kubeadm join 10.128.0.32:6443 --token z4y0o7.cu731d2j1pu0gdbo --discovery-token-ca-cert-hash sha256:3493be1b870958071e4f606b32ccabb683a4552f3efd8d9a9d280aa7338ddae0

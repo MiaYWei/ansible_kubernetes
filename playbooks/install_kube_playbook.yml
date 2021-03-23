@@ -1,0 +1,16 @@
+---
+- hosts: k8s-all
+  remote_user:root
+  vars:
+    kube_version: 1.16.0-0
+  tasks:
+   - name: prepare env
+     script: ./pre-setup.sh      
+
+   - name: install kubectl,kubeadm,kubelet
+     yum: name={{item}} state=present
+     with_items:
+        - kubectl-{{kube_version}}
+        - kubeadm-{{kube_version}}
+        - kubelet-{{kube_version}}
+ 
