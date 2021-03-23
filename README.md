@@ -138,6 +138,12 @@ In our project, Ansible playbooks are implemented to
 ![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/nodes.jpg)
 ![image](https://github.com/MiaYWei/Ansible-deploying-kubernetes/blob/readme/images/pods.jpg)
 
+## Authors
+
+* **Mia Wei** - *Initial work*
+
+See also [Mengyao Wu](https://github.com/MengyaoWuNotAvailable/jetson_ML_container_collection) who participated in this project for ML part.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
