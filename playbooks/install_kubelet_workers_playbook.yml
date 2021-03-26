@@ -7,7 +7,7 @@
    - name: prepare env
      script: ./pre-setup.sh      
 
-   - name: install kubectl,kubeadm,kubelet
+   - name: install kubelet
      yum: name={{item}} state=present
      with_items:
         - kubelet-{{kube_version}}
