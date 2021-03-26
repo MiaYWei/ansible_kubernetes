@@ -123,10 +123,13 @@ In our project, Ansible playbooks are implemented to
 ```
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/workers.jpg)
 
-### 4. Install kubectl and kubelet 
+### 4. Install kubectl kubeadm and kubelet on master node
+###    Install kubelet on all the worker nodes
 ```
-  ansible-playbook deploy_kube_playbook.yml
+  ansible-playbook install_kube_master_playbook.yml
+  ansible-playbook install_kubelet_wokers_playbook.yml
 ```
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/install_kubelet_workers.jpg)
 
 ### 5. Install Docker
 ```
