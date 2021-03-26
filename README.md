@@ -104,7 +104,8 @@ In our project, Ansible playbooks are implemented to
   deploy_master_playbook.yml
   deploy_worker_playbook.yml
   install_docker_playbook.yml
-  install_kube_playbook.yml
+  install_kube_master_playbook.yml
+  install_kubelet_workers_playbook.yml
 ```
 
 ### 1. Upload playbooks to ansible server node
