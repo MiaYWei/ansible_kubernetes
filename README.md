@@ -14,25 +14,25 @@ These instructions will get you a copy of the project up and running on your loc
 * [Kubernetes](https://kubernetes.io/docs/home/) - Kubernetes Cluster
 * Google Cloud Platform
 
-### Test Environment
+## Test Environment
 
 * Linux OS: CentOS Linux release 7.9.2009 (Core)
 * VMs deployed on Google Cloud Platform
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/GoogleCloudPlatform.jpg)
 
-### Network Topology
+## Network Topology
 
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/topology.jpg)
 ```
-Ansible Server:
-  10.128.0.30
-Kubernetes Clusters: 
-  10.128.0.32 k8s-master
-  10.128.0.33 k8s-node-1
-  10.128.0.34 k8s-node-2
-  10.128.0.35 k8s-node-3
-  10.128.0.36 k8s-node-4
-Pods Addresses: 10.244.0.0./16
+	Ansible Server:
+	  10.128.0.30
+	Kubernetes Clusters: 
+	  10.128.0.32 k8s-master
+	  10.128.0.33 k8s-node-1
+	  10.128.0.34 k8s-node-2
+	  10.128.0.35 k8s-node-3
+	  10.128.0.36 k8s-node-4
+	Pods Addresses: 10.244.0.0./16
 ```
 
 ### Ansible Installation and Configuration
@@ -40,9 +40,9 @@ Pods Addresses: 10.244.0.0./16
 #### 1. Install Ansible Server (10.128.0.30)
 Install ansible tool 
 ```
-  sudo yum install epel-release
-  sudo yum install ansible
-  ansible --version
+	sudo yum install epel-release
+	sudo yum install ansible
+	ansible --version
 ```
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/ansible.jpg)
 
@@ -68,79 +68,87 @@ Install ansible tool
 
 ##### 3.1 SSH configuration on all the nodes (10.28.0.30; 10.28.0.32/33/34/35/36)
 ```
-  vim /etc/ssh/sshd_config    
-	• PasswordAuthentication yes 
-	• PermitRootLogin yes
-  sudo systemctl restart sshd
+	vim /etc/ssh/sshd_config    
+		• PasswordAuthentication yes 
+		• PermitRootLogin yes
+	sudo systemctl restart sshd
 ```
-
-##### 3.2 Generate ssh key on ansible node
+##### 3.2 Generate ssh key on ansible server
 ```
-  ssh-keygen
+	ssh-keygen
 ```
-
 ##### 3.3 Copy ssh key from ansile node to all the nodes 
 ```
-  ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.32
-  ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.33
-  ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.34
-  ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.35
-  ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.36
+	ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.32
+	ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.33
+	ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.34
+	ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.35
+	ssh-copy-id -i ~/.ssh/id_rsa.pub 10.128.0.36
 ```
-
 ##### 3.4 Check Connectivity  
 ```
-  ansible -m ping all
+	ansible -m ping all
 ```
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/ansible_ping.jpg)
 
-## Ansible Playbooks
+## Ansible Playbooks deploy Kubernetes cluster
 In our project, Ansible playbooks are implemented to
 
 * Deploy Kubernetes cluster: master node and worker nodes
-* Install, upgrade or downgrade software: Docker and kubectl and kubelet
+* Install, upgrade or downgrade software: Docker; kubectl, kubeadm, and kubelet
 
 ```
-  deploy_master_playbook.yml
-  deploy_worker_playbook.yml
-  install_docker_playbook.yml
-  install_kube_master_playbook.yml
-  install_kubelet_workers_playbook.yml
+	install_docker_playbook.yml
+	install_kube_master_playbook.yml
+	install_kube_workers_playbook.yml
+	deploy_master_playbook.yml
+	deploy_workers_playbook.yml
 ```
 
 ### 1. Upload playbooks to ansible server node
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/playbooks.jpg)
 
-### 2. Deploy master node
+### 2. Install Docker on all the nodes
 ```
-  cd mia_playbook
-  ansible-playbook deploy_master_playbook.yml
+	ansible-playbook deploy_docker_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/master.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/install_docker.jpg)
 
-### 3. Deploy worker nodes 
+### 3. Install kubectl, kubeadm and kubelet on master node
 ```
-  ansible-playbook deploy_worker_playbook.yml
+	ansible-playbook install_kube_master_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/workers.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/install_master.jpg)
 
-### 4. Install kubectl kubeadm and kubelet on master node
-###    Install kubelet on all the worker nodes
+### 4. Install kubeadm and kubelet on workers node
 ```
-  ansible-playbook install_kube_master_playbook.yml
-  ansible-playbook install_kubelet_wokers_playbook.yml
+	ansible-playbook install_kube_wokers_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/install_kubelet_workers.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/install_workers.jpg)
 
-### 5. Install Docker
+### 5. Deploy control plan
 ```
-  ansible-playbook deploy_docker_playbook.yml
+	ansible-playbook deploy_master_playbook.yml
 ```
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/docker.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/deploy_master.jpg)
 
-### 6. Check the deployment status
+### 6. Deploy worker nodes 
+```
+	ansible-playbook deploy_workers_playbook.yml
+```
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/deploy_workers.jpg)
+
+### 7. Check the deployment status
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/nodes.jpg)
 ![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/pods.jpg)
+
+### Software upgrade/downgrade 
+
+#### Modify the kube_version in playbook, and run the modified playbook to re-install
+
+#### For example: downgrade all the kube softwware to 1.15.0-0 on all the worker nodes
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/donwgrade_playbook.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/donwgrade.jpg)
 
 ## Authors
 
@@ -151,7 +159,3 @@ See also [Mengyao Wu](https://github.com/MengyaoWuNotAvailable/jetson_ML_contain
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-* etc
-

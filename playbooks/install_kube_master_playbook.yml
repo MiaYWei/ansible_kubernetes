@@ -1,5 +1,5 @@
 ---
-- hosts: k8s-all
+- hosts: k8s-master
   remote_user:root
   vars:
     kube_version: 1.16.0-0
