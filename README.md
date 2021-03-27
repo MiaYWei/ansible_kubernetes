@@ -147,8 +147,8 @@ In our project, Ansible playbooks are implemented to
 #### Modify the kube_version in playbook, and run the modified playbook to re-install
 
 #### For example: downgrade all the kube softwware to 1.15.0-0 on all the worker nodes
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/donwgrade_playbook.jpg)
-![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/donwgrade.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/downgrade_playbook.jpg)
+![image](https://github.com/MiaYWei/ansible_kubernetes/blob/main/images/downgrade.jpg)
 
 ## Authors
 
